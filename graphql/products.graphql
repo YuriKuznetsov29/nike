@@ -1,0 +1,28 @@
+query GetProducts {
+    products {
+        title
+        slug
+        description
+        price
+        gender
+        category {
+            name
+            slug
+        }
+        type {
+            name
+            slug
+        }
+        colors {
+            name
+            hex
+        }
+        sizes {
+            label
+        }
+        images {
+            url
+            alternativeText
+        }
+    }
+}

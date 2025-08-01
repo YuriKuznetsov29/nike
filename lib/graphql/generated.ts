@@ -16,7 +16,6 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   AboutBlocksDynamicZoneInput: { input: any; output: any; }
-  ArticleBlocksDynamicZoneInput: { input: any; output: any; }
   DateTime: { input: any; output: any; }
   JSON: { input: any; output: any; }
 };
@@ -37,114 +36,6 @@ export type AboutInput = {
   blocks?: InputMaybe<Array<Scalars['AboutBlocksDynamicZoneInput']['input']>>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Article = {
-  __typename?: 'Article';
-  author?: Maybe<Author>;
-  blocks?: Maybe<Array<Maybe<ArticleBlocksDynamicZone>>>;
-  category?: Maybe<Category>;
-  cover?: Maybe<UploadFile>;
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  documentId: Scalars['ID']['output'];
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  slug?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type ArticleBlocksDynamicZone = ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSlider | Error;
-
-export type ArticleEntityResponseCollection = {
-  __typename?: 'ArticleEntityResponseCollection';
-  nodes: Array<Article>;
-  pageInfo: Pagination;
-};
-
-export type ArticleFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ArticleFiltersInput>>>;
-  author?: InputMaybe<AuthorFiltersInput>;
-  category?: InputMaybe<CategoryFiltersInput>;
-  createdAt?: InputMaybe<DateTimeFilterInput>;
-  description?: InputMaybe<StringFilterInput>;
-  documentId?: InputMaybe<IdFilterInput>;
-  not?: InputMaybe<ArticleFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<ArticleFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
-  slug?: InputMaybe<StringFilterInput>;
-  title?: InputMaybe<StringFilterInput>;
-  updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type ArticleInput = {
-  author?: InputMaybe<Scalars['ID']['input']>;
-  blocks?: InputMaybe<Array<Scalars['ArticleBlocksDynamicZoneInput']['input']>>;
-  category?: InputMaybe<Scalars['ID']['input']>;
-  cover?: InputMaybe<Scalars['ID']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-  slug?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type ArticleRelationResponseCollection = {
-  __typename?: 'ArticleRelationResponseCollection';
-  nodes: Array<Article>;
-};
-
-export type Author = {
-  __typename?: 'Author';
-  articles: Array<Maybe<Article>>;
-  articles_connection?: Maybe<ArticleRelationResponseCollection>;
-  avatar?: Maybe<UploadFile>;
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  documentId: Scalars['ID']['output'];
-  email?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-
-export type AuthorArticlesArgs = {
-  filters?: InputMaybe<ArticleFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type AuthorArticles_ConnectionArgs = {
-  filters?: InputMaybe<ArticleFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type AuthorEntityResponseCollection = {
-  __typename?: 'AuthorEntityResponseCollection';
-  nodes: Array<Author>;
-  pageInfo: Pagination;
-};
-
-export type AuthorFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<AuthorFiltersInput>>>;
-  articles?: InputMaybe<ArticleFiltersInput>;
-  createdAt?: InputMaybe<DateTimeFilterInput>;
-  documentId?: InputMaybe<IdFilterInput>;
-  email?: InputMaybe<StringFilterInput>;
-  name?: InputMaybe<StringFilterInput>;
-  not?: InputMaybe<AuthorFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<AuthorFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
-  updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type AuthorInput = {
-  articles?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  avatar?: InputMaybe<Scalars['ID']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type BooleanFilterInput = {
@@ -174,27 +65,26 @@ export type BooleanFilterInput = {
 
 export type Category = {
   __typename?: 'Category';
-  articles: Array<Maybe<Article>>;
-  articles_connection?: Maybe<ArticleRelationResponseCollection>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
   documentId: Scalars['ID']['output'];
   name?: Maybe<Scalars['String']['output']>;
+  products: Array<Maybe<Product>>;
+  products_connection?: Maybe<ProductRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 
-export type CategoryArticlesArgs = {
-  filters?: InputMaybe<ArticleFiltersInput>;
+export type CategoryProductsArgs = {
+  filters?: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-export type CategoryArticles_ConnectionArgs = {
-  filters?: InputMaybe<ArticleFiltersInput>;
+export type CategoryProducts_ConnectionArgs = {
+  filters?: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -207,24 +97,79 @@ export type CategoryEntityResponseCollection = {
 
 export type CategoryFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<CategoryFiltersInput>>>;
-  articles?: InputMaybe<ArticleFiltersInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
-  description?: InputMaybe<StringFilterInput>;
   documentId?: InputMaybe<IdFilterInput>;
   name?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<CategoryFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<CategoryFiltersInput>>>;
+  products?: InputMaybe<ProductFiltersInput>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   slug?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type CategoryInput = {
-  articles?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  description?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  products?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Color = {
+  __typename?: 'Color';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  hex?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  products: Array<Maybe<Product>>;
+  products_connection?: Maybe<ProductRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type ColorProductsArgs = {
+  filters?: InputMaybe<ProductFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ColorProducts_ConnectionArgs = {
+  filters?: InputMaybe<ProductFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ColorEntityResponseCollection = {
+  __typename?: 'ColorEntityResponseCollection';
+  nodes: Array<Color>;
+  pageInfo: Pagination;
+};
+
+export type ColorFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ColorFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  hex?: InputMaybe<StringFilterInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ColorFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ColorFiltersInput>>>;
+  products?: InputMaybe<ProductFiltersInput>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ColorInput = {
+  hex?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  products?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type ColorRelationResponseCollection = {
+  __typename?: 'ColorRelationResponseCollection';
+  nodes: Array<Color>;
 };
 
 export type ComponentSharedMedia = {
@@ -312,6 +257,18 @@ export type DeleteMutationResponse = {
   documentId: Scalars['ID']['output'];
 };
 
+export enum Enum_Gender_Gender {
+  Men = 'Men',
+  Unisex = 'Unisex',
+  Women = 'Women'
+}
+
+export enum Enum_Product_Gender {
+  Men = 'Men',
+  Unisex = 'Unisex',
+  Women = 'Women'
+}
+
 export type Error = {
   __typename?: 'Error';
   code: Scalars['String']['output'];
@@ -349,7 +306,38 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = About | Article | Author | Category | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSeo | ComponentSharedSlider | Global | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type Gender = {
+  __typename?: 'Gender';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  gender?: Maybe<Enum_Gender_Gender>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type GenderEntityResponseCollection = {
+  __typename?: 'GenderEntityResponseCollection';
+  nodes: Array<Gender>;
+  pageInfo: Pagination;
+};
+
+export type GenderFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<GenderFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  gender?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<GenderFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<GenderFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type GenderInput = {
+  gender?: InputMaybe<Enum_Gender_Gender>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type GenericMorph = About | Category | Color | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSeo | ComponentSharedSlider | Gender | Global | I18NLocale | Product | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | Size | Type | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Global = {
   __typename?: 'Global';
@@ -478,22 +466,28 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
-  createArticle?: Maybe<Article>;
-  createAuthor?: Maybe<Author>;
   createCategory?: Maybe<Category>;
+  createColor?: Maybe<Color>;
+  createGender?: Maybe<Gender>;
+  createProduct?: Maybe<Product>;
   createReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   createReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
+  createSize?: Maybe<Size>;
+  createType?: Maybe<Type>;
   /** Create a new role */
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteAbout?: Maybe<DeleteMutationResponse>;
-  deleteArticle?: Maybe<DeleteMutationResponse>;
-  deleteAuthor?: Maybe<DeleteMutationResponse>;
   deleteCategory?: Maybe<DeleteMutationResponse>;
+  deleteColor?: Maybe<DeleteMutationResponse>;
+  deleteGender?: Maybe<DeleteMutationResponse>;
   deleteGlobal?: Maybe<DeleteMutationResponse>;
+  deleteProduct?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
+  deleteSize?: Maybe<DeleteMutationResponse>;
+  deleteType?: Maybe<DeleteMutationResponse>;
   deleteUploadFile?: Maybe<UploadFile>;
   /** Delete an existing role */
   deleteUsersPermissionsRole?: Maybe<UsersPermissionsDeleteRolePayload>;
@@ -509,12 +503,15 @@ export type Mutation = {
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateAbout?: Maybe<About>;
-  updateArticle?: Maybe<Article>;
-  updateAuthor?: Maybe<Author>;
   updateCategory?: Maybe<Category>;
+  updateColor?: Maybe<Color>;
+  updateGender?: Maybe<Gender>;
   updateGlobal?: Maybe<Global>;
+  updateProduct?: Maybe<Product>;
   updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
+  updateSize?: Maybe<Size>;
+  updateType?: Maybe<Type>;
   updateUploadFile: UploadFile;
   /** Update an existing role */
   updateUsersPermissionsRole?: Maybe<UsersPermissionsUpdateRolePayload>;
@@ -530,20 +527,26 @@ export type MutationChangePasswordArgs = {
 };
 
 
-export type MutationCreateArticleArgs = {
-  data: ArticleInput;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type MutationCreateAuthorArgs = {
-  data: AuthorInput;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
 export type MutationCreateCategoryArgs = {
   data: CategoryInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationCreateColorArgs = {
+  data: ColorInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationCreateGenderArgs = {
+  data: GenderInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationCreateProductArgs = {
+  data: ProductInput;
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -560,6 +563,18 @@ export type MutationCreateReviewWorkflowsWorkflowStageArgs = {
 };
 
 
+export type MutationCreateSizeArgs = {
+  data: SizeInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationCreateTypeArgs = {
+  data: TypeInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
 export type MutationCreateUsersPermissionsRoleArgs = {
   data: UsersPermissionsRoleInput;
 };
@@ -570,17 +585,22 @@ export type MutationCreateUsersPermissionsUserArgs = {
 };
 
 
-export type MutationDeleteArticleArgs = {
-  documentId: Scalars['ID']['input'];
-};
-
-
-export type MutationDeleteAuthorArgs = {
-  documentId: Scalars['ID']['input'];
-};
-
-
 export type MutationDeleteCategoryArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteColorArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteGenderArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteProductArgs = {
   documentId: Scalars['ID']['input'];
 };
 
@@ -591,6 +611,16 @@ export type MutationDeleteReviewWorkflowsWorkflowArgs = {
 
 
 export type MutationDeleteReviewWorkflowsWorkflowStageArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteSizeArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteTypeArgs = {
   documentId: Scalars['ID']['input'];
 };
 
@@ -643,20 +673,6 @@ export type MutationUpdateAboutArgs = {
 };
 
 
-export type MutationUpdateArticleArgs = {
-  data: ArticleInput;
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type MutationUpdateAuthorArgs = {
-  data: AuthorInput;
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
 export type MutationUpdateCategoryArgs = {
   data: CategoryInput;
   documentId: Scalars['ID']['input'];
@@ -664,8 +680,29 @@ export type MutationUpdateCategoryArgs = {
 };
 
 
+export type MutationUpdateColorArgs = {
+  data: ColorInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationUpdateGenderArgs = {
+  data: GenderInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
 export type MutationUpdateGlobalArgs = {
   data: GlobalInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationUpdateProductArgs = {
+  data: ProductInput;
+  documentId: Scalars['ID']['input'];
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -679,6 +716,20 @@ export type MutationUpdateReviewWorkflowsWorkflowArgs = {
 
 export type MutationUpdateReviewWorkflowsWorkflowStageArgs = {
   data: ReviewWorkflowsWorkflowStageInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationUpdateSizeArgs = {
+  data: SizeInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationUpdateTypeArgs = {
+  data: TypeInput;
   documentId: Scalars['ID']['input'];
   status?: InputMaybe<PublicationStatus>;
 };
@@ -716,6 +767,113 @@ export type PaginationArg = {
   start?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type Product = {
+  __typename?: 'Product';
+  category?: Maybe<Category>;
+  colors: Array<Maybe<Color>>;
+  colors_connection?: Maybe<ColorRelationResponseCollection>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['JSON']['output']>;
+  documentId: Scalars['ID']['output'];
+  gender: Enum_Product_Gender;
+  images: Array<Maybe<UploadFile>>;
+  images_connection?: Maybe<UploadFileRelationResponseCollection>;
+  price: Scalars['Float']['output'];
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  sizes: Array<Maybe<Size>>;
+  sizes_connection?: Maybe<SizeRelationResponseCollection>;
+  slug?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
+  type?: Maybe<Type>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type ProductColorsArgs = {
+  filters?: InputMaybe<ColorFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ProductColors_ConnectionArgs = {
+  filters?: InputMaybe<ColorFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ProductImagesArgs = {
+  filters?: InputMaybe<UploadFileFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ProductImages_ConnectionArgs = {
+  filters?: InputMaybe<UploadFileFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ProductSizesArgs = {
+  filters?: InputMaybe<SizeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ProductSizes_ConnectionArgs = {
+  filters?: InputMaybe<SizeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ProductEntityResponseCollection = {
+  __typename?: 'ProductEntityResponseCollection';
+  nodes: Array<Product>;
+  pageInfo: Pagination;
+};
+
+export type ProductFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ProductFiltersInput>>>;
+  category?: InputMaybe<CategoryFiltersInput>;
+  colors?: InputMaybe<ColorFiltersInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  description?: InputMaybe<JsonFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  gender?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ProductFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ProductFiltersInput>>>;
+  price?: InputMaybe<FloatFilterInput>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  sizes?: InputMaybe<SizeFiltersInput>;
+  slug?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+  type?: InputMaybe<TypeFiltersInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ProductInput = {
+  category?: InputMaybe<Scalars['ID']['input']>;
+  colors?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  description?: InputMaybe<Scalars['JSON']['input']>;
+  gender?: InputMaybe<Enum_Product_Gender>;
+  images?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  price?: InputMaybe<Scalars['Float']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  sizes?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type ProductRelationResponseCollection = {
+  __typename?: 'ProductRelationResponseCollection';
+  nodes: Array<Product>;
+};
+
 export enum PublicationStatus {
   Draft = 'DRAFT',
   Published = 'PUBLISHED'
@@ -724,26 +882,35 @@ export enum PublicationStatus {
 export type Query = {
   __typename?: 'Query';
   about?: Maybe<About>;
-  article?: Maybe<Article>;
-  articles: Array<Maybe<Article>>;
-  articles_connection?: Maybe<ArticleEntityResponseCollection>;
-  author?: Maybe<Author>;
-  authors: Array<Maybe<Author>>;
-  authors_connection?: Maybe<AuthorEntityResponseCollection>;
   categories: Array<Maybe<Category>>;
   categories_connection?: Maybe<CategoryEntityResponseCollection>;
   category?: Maybe<Category>;
+  color?: Maybe<Color>;
+  colors: Array<Maybe<Color>>;
+  colors_connection?: Maybe<ColorEntityResponseCollection>;
+  gender?: Maybe<Gender>;
+  genders: Array<Maybe<Gender>>;
+  genders_connection?: Maybe<GenderEntityResponseCollection>;
   global?: Maybe<Global>;
   i18NLocale?: Maybe<I18NLocale>;
   i18NLocales: Array<Maybe<I18NLocale>>;
   i18NLocales_connection?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
+  product?: Maybe<Product>;
+  products: Array<Maybe<Product>>;
+  products_connection?: Maybe<ProductEntityResponseCollection>;
   reviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   reviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   reviewWorkflowsWorkflowStages: Array<Maybe<ReviewWorkflowsWorkflowStage>>;
   reviewWorkflowsWorkflowStages_connection?: Maybe<ReviewWorkflowsWorkflowStageEntityResponseCollection>;
   reviewWorkflowsWorkflows: Array<Maybe<ReviewWorkflowsWorkflow>>;
   reviewWorkflowsWorkflows_connection?: Maybe<ReviewWorkflowsWorkflowEntityResponseCollection>;
+  size?: Maybe<Size>;
+  sizes: Array<Maybe<Size>>;
+  sizes_connection?: Maybe<SizeEntityResponseCollection>;
+  type?: Maybe<Type>;
+  types: Array<Maybe<Type>>;
+  types_connection?: Maybe<TypeEntityResponseCollection>;
   uploadFile?: Maybe<UploadFile>;
   uploadFiles: Array<Maybe<UploadFile>>;
   uploadFiles_connection?: Maybe<UploadFileEntityResponseCollection>;
@@ -757,50 +924,6 @@ export type Query = {
 
 
 export type QueryAboutArgs = {
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryArticleArgs = {
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryArticlesArgs = {
-  filters?: InputMaybe<ArticleFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryArticles_ConnectionArgs = {
-  filters?: InputMaybe<ArticleFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryAuthorArgs = {
-  documentId: Scalars['ID']['input'];
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryAuthorsArgs = {
-  filters?: InputMaybe<AuthorFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  status?: InputMaybe<PublicationStatus>;
-};
-
-
-export type QueryAuthors_ConnectionArgs = {
-  filters?: InputMaybe<AuthorFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -827,6 +950,50 @@ export type QueryCategoryArgs = {
 };
 
 
+export type QueryColorArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryColorsArgs = {
+  filters?: InputMaybe<ColorFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryColors_ConnectionArgs = {
+  filters?: InputMaybe<ColorFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryGenderArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryGendersArgs = {
+  filters?: InputMaybe<GenderFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryGenders_ConnectionArgs = {
+  filters?: InputMaybe<GenderFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
 export type QueryGlobalArgs = {
   status?: InputMaybe<PublicationStatus>;
 };
@@ -848,6 +1015,28 @@ export type QueryI18NLocalesArgs = {
 
 export type QueryI18NLocales_ConnectionArgs = {
   filters?: InputMaybe<I18NLocaleFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryProductArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryProductsArgs = {
+  filters?: InputMaybe<ProductFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryProducts_ConnectionArgs = {
+  filters?: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   status?: InputMaybe<PublicationStatus>;
@@ -892,6 +1081,50 @@ export type QueryReviewWorkflowsWorkflowsArgs = {
 
 export type QueryReviewWorkflowsWorkflows_ConnectionArgs = {
   filters?: InputMaybe<ReviewWorkflowsWorkflowFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QuerySizeArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QuerySizesArgs = {
+  filters?: InputMaybe<SizeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QuerySizes_ConnectionArgs = {
+  filters?: InputMaybe<SizeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryTypeArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryTypesArgs = {
+  filters?: InputMaybe<TypeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryTypes_ConnectionArgs = {
+  filters?: InputMaybe<TypeFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   status?: InputMaybe<PublicationStatus>;
@@ -1060,6 +1293,60 @@ export type ReviewWorkflowsWorkflowStageRelationResponseCollection = {
   nodes: Array<ReviewWorkflowsWorkflowStage>;
 };
 
+export type Size = {
+  __typename?: 'Size';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  label?: Maybe<Scalars['String']['output']>;
+  products: Array<Maybe<Product>>;
+  products_connection?: Maybe<ProductRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type SizeProductsArgs = {
+  filters?: InputMaybe<ProductFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type SizeProducts_ConnectionArgs = {
+  filters?: InputMaybe<ProductFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type SizeEntityResponseCollection = {
+  __typename?: 'SizeEntityResponseCollection';
+  nodes: Array<Size>;
+  pageInfo: Pagination;
+};
+
+export type SizeFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<SizeFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  label?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<SizeFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<SizeFiltersInput>>>;
+  products?: InputMaybe<ProductFiltersInput>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type SizeInput = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  products?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type SizeRelationResponseCollection = {
+  __typename?: 'SizeRelationResponseCollection';
+  nodes: Array<Size>;
+};
+
 export type StringFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1083,6 +1370,58 @@ export type StringFilterInput = {
   null?: InputMaybe<Scalars['Boolean']['input']>;
   or?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   startsWith?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Type = {
+  __typename?: 'Type';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  name?: Maybe<Scalars['String']['output']>;
+  products: Array<Maybe<Product>>;
+  products_connection?: Maybe<ProductRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type TypeProductsArgs = {
+  filters?: InputMaybe<ProductFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type TypeProducts_ConnectionArgs = {
+  filters?: InputMaybe<ProductFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type TypeEntityResponseCollection = {
+  __typename?: 'TypeEntityResponseCollection';
+  nodes: Array<Type>;
+  pageInfo: Pagination;
+};
+
+export type TypeFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<TypeFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<TypeFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<TypeFiltersInput>>>;
+  products?: InputMaybe<ProductFiltersInput>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type TypeInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  products?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UploadFile = {
@@ -1357,53 +1696,71 @@ export type UsersPermissionsUserRelationResponseCollection = {
   nodes: Array<UsersPermissionsUser>;
 };
 
-export type GetArticlesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetArticlesQuery = { __typename?: 'Query', articles: Array<{ __typename?: 'Article', title?: string | null, slug?: string | null, author?: { __typename?: 'Author', name?: string | null } | null } | null> };
+export type GetProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', title: string, slug?: string | null, description?: any | null, price: number, gender: Enum_Product_Gender, category?: { __typename?: 'Category', name?: string | null, slug?: string | null } | null, type?: { __typename?: 'Type', name?: string | null, slug?: string | null } | null, colors: Array<{ __typename?: 'Color', name?: string | null, hex?: string | null } | null>, sizes: Array<{ __typename?: 'Size', label?: string | null } | null>, images: Array<{ __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null> } | null> };
 
 
-export const GetArticlesDocument = gql`
-    query GetArticles {
-  articles {
-    title
-    author {
-      name
-    }
+export const GetProductsDocument = gql`
+    query GetProducts {
+  products {
     title
     slug
+    description
+    price
+    gender
+    category {
+      name
+      slug
+    }
+    type {
+      name
+      slug
+    }
+    colors {
+      name
+      hex
+    }
+    sizes {
+      label
+    }
+    images {
+      url
+      alternativeText
+    }
   }
 }
     `;
 
 /**
- * __useGetArticlesQuery__
+ * __useGetProductsQuery__
  *
- * To run a query within a React component, call `useGetArticlesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetArticlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetArticlesQuery({
+ * const { data, loading, error } = useGetProductsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetArticlesQuery(baseOptions?: Apollo.QueryHookOptions<GetArticlesQuery, GetArticlesQueryVariables>) {
+export function useGetProductsQuery(baseOptions?: Apollo.QueryHookOptions<GetProductsQuery, GetProductsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetArticlesQuery, GetArticlesQueryVariables>(GetArticlesDocument, options);
+        return Apollo.useQuery<GetProductsQuery, GetProductsQueryVariables>(GetProductsDocument, options);
       }
-export function useGetArticlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetArticlesQuery, GetArticlesQueryVariables>) {
+export function useGetProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProductsQuery, GetProductsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetArticlesQuery, GetArticlesQueryVariables>(GetArticlesDocument, options);
+          return Apollo.useLazyQuery<GetProductsQuery, GetProductsQueryVariables>(GetProductsDocument, options);
         }
-export function useGetArticlesSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetArticlesQuery, GetArticlesQueryVariables>) {
+export function useGetProductsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductsQuery, GetProductsQueryVariables>) {
           const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetArticlesQuery, GetArticlesQueryVariables>(GetArticlesDocument, options);
+          return Apollo.useSuspenseQuery<GetProductsQuery, GetProductsQueryVariables>(GetProductsDocument, options);
         }
-export type GetArticlesQueryHookResult = ReturnType<typeof useGetArticlesQuery>;
-export type GetArticlesLazyQueryHookResult = ReturnType<typeof useGetArticlesLazyQuery>;
-export type GetArticlesSuspenseQueryHookResult = ReturnType<typeof useGetArticlesSuspenseQuery>;
-export type GetArticlesQueryResult = Apollo.QueryResult<GetArticlesQuery, GetArticlesQueryVariables>;
+export type GetProductsQueryHookResult = ReturnType<typeof useGetProductsQuery>;
+export type GetProductsLazyQueryHookResult = ReturnType<typeof useGetProductsLazyQuery>;
+export type GetProductsSuspenseQueryHookResult = ReturnType<typeof useGetProductsSuspenseQuery>;
+export type GetProductsQueryResult = Apollo.QueryResult<GetProductsQuery, GetProductsQueryVariables>;
