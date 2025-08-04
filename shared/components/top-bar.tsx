@@ -1,5 +1,5 @@
-import Jordan from '@/shared/icons/jordan.svg'
-import Converse from '@/shared/icons/converse.svg'
+import Jordan from '@/shared/assets/icons/jordan.svg'
+import Converse from '@/shared/assets/icons/converse.svg'
 import Image from 'next/image'
 import Link from 'next/link'
 

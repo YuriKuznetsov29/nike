@@ -10,7 +10,7 @@ const buttonVariants = cva(
         variants: {
             variant: {
                 default:
-                    'bg-[var(--podium-cds-button-color-bg-primary-on-dark)] color-[var(--podium-cds-color-text-primary-on-light)] weight-500 text-primary-foreground shadow-xs hover:bg-[var(--podium-cds-button-color-bg-primary-hover-on-dark)]',
+                    'bg-[var(--podium-cds-button-color-bg-primary-on-dark)] text-[var(--podium-cds-color-text-primary-on-light)] weight-500 shadow-xs hover:bg-[var(--podium-cds-button-color-bg-primary-hover-on-dark)]',
 
                 link: 'text-primary underline-offset-4 hover:underline',
             },

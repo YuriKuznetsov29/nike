@@ -2,6 +2,7 @@
 
 import client from '@/lib/graphql/apolloClient'
 import { Card } from '@/shared/components/card'
+import { Filters } from '@/shared/components/filters'
 import { Footer } from '@/shared/components/footer'
 import { Gallery } from '@/shared/components/gallery'
 import { Header } from '@/shared/components/header'
@@ -16,8 +17,11 @@ export default function Home() {
         <ApolloProvider client={client}>
             <TopBar />
             <Header />
-            <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-                <Gallery />
+            <main className="w-full flex flex-col gap-[32px]">
+                <div className="max-w-[1920px] flex justify-center gap-[32px]">
+                    <Filters />
+                    <Products />
+                </div>
                 <Menu />
             </main>
             <Footer />
